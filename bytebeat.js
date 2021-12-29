@@ -1,7 +1,6 @@
-// eslint-disable-next-line no-unused-vars tuk tuk tuk!!!!!!!!!!!!
-const bytebeat = new class Bytebeat {
+// eslint-disable-next-line no-unused-vars
+const bytebeat = new class {
 	constructor() {
-		//ii2
 		this.audioCtx = null;
 		this.audioGain = null;
 		this.audioRecorder = null;
@@ -14,7 +13,6 @@ const bytebeat = new class Bytebeat {
 		this.controlCounter = null;
 		this.controlMode = null;
 		this.controlSampleRate = null;
-		this.controlFileFormat = null;
 		this.controlScaleDown = null;
 		this.controlTogglePlay = null;
 		this.controlVolume = null;
@@ -32,8 +30,14 @@ const bytebeat = new class Bytebeat {
 		this.sampleRate = 8000;
 		this.settings = { drawMode: 'Points', drawScale: 5, isSeconds: false };
 		this.timeCursor = null;
-		document.addEventListener('DOMContentLoaded', async () => { this.initControls(); this.initSettings(); await this.initAudioContext(); this.initLibraryEvents(); this.initEditor();});
 		document.addEventListener('visibilitychange', () => (this.isActiveTab = !document.hidden));
+		if(window.location.hostname.includes(unescape('%64%6f%6c%6c%63%68%61%6e%2e%6e%65%74'))) {
+			if(document.readyState !== 'loading') {
+				this.init();
+				return;
+			}
+			document.addEventListener('DOMContentLoaded', () => this.init());
+		}
 	}
 	get saveData() {
 		const a = document.body.appendChild(document.createElement('a'));
@@ -75,7 +79,7 @@ const bytebeat = new class Bytebeat {
 		let startX = this.mod(this.getX(startTime), width);
 		const endX = Math.floor(startX + this.getX(endTime - startTime));
 		startX = Math.floor(startX);
-		const drawWidth = Math.min(Math.abs(endX - startX) + 1, 2048);
+		const drawWidth = Math.min(Math.abs(endX - startX) + 1, 1024);
 		// Restoring the last points of a previous segment
 		const imageData = this.canvasCtx.createImageData(drawWidth, height);
 		if(this.settings.drawScale) {
@@ -129,6 +133,13 @@ const bytebeat = new class Bytebeat {
 	expandEditor() {
 		this.containerFixed.classList.toggle('container-expanded');
 	}
+	async init() {
+		this.initControls();
+		this.initSettings();
+		await this.initAudioContext();
+		this.initLibraryEvents();
+		this.initEditor();
+	}
 	async initAudioContext() {
 		this.audioCtx = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
 		await this.audioCtx.audioWorklet.addModule('audioProcessor.js');
@@ -173,7 +184,7 @@ const bytebeat = new class Bytebeat {
 		this.controlVolume = document.getElementById('control-volume');
 		this.timeCursor = document.getElementById('canvas-timecursor');
 		this.controlCounter.oninput = this.controlCounter.onkeydown = e => {
-			if(e.keyCode === 13 /* ENTER */) {
+			if(e.key === 'Enter') {
 				this.controlCounter.blur();
 				this.togglePlay(true);
 				return;
@@ -189,7 +200,7 @@ const bytebeat = new class Bytebeat {
 		this.editorElem = document.getElementById('editor');
 		this.editorElem.oninput = () => this.setFunction();
 		this.editorElem.onkeydown = e => {
-			if(e.keyCode === 9 /* TAB */ && !e.shiftKey && !e.altKey && !e.ctrlKey) {
+			if(e.key === 'Tab' && !e.shiftKey && !e.altKey && !e.ctrlKey) {
 				e.preventDefault();
 				const el = e.target;
 				const { value, selectionStart } = el;
@@ -358,6 +369,7 @@ const bytebeat = new class Bytebeat {
 		if(isSendData) {
 			this.sendData({ sampleRatio: this.sampleRate / this.audioCtx.sampleRate });
 		}
+	}
 	setScale(amount, buttonElem) {
 		if(buttonElem && buttonElem.getAttribute('disabled')) {
 			return;
