@@ -21,7 +21,7 @@
 <body>
 	<div id="content">
 		<div id="container-fixed">
-			<textarea id="editor" spellcheck="false">t*(t&16384?6:5)*(4-(1&t>>8))>>(3&-t>>9)|t>>6</textarea>
+			<textarea id="editor" spellcheck="false">a="Made by u/StepanShi and u/kOlbOSa_exe.", a.charCodeAt((t>>8)%a.length)</textarea>
 			<div class="controls">
 				<div id="control-counter-units" class="control-button" title="Time units" onclick="bytebeat.toggleCounterUnits();">t</div>
 				<input type="text" id="control-counter" value="0" title="Set time to jump along the timeline then press Enter" onclick="bytebeat.togglePlay(false);">
@@ -51,7 +51,14 @@
 				<select id="control-mode" class="control-select" title="Sound mode" onchange="bytebeat.setMode(this.selectedOptions[0].value);">
 					<option value="Bytebeat" selected>Bytebeat</option>
 					<option value="Signed Bytebeat">Signed Bytebeat</option>
-					<option value="Floatbeat">Floatbeat</option>
+					<option value="Floatbeat">Floatbeat</option>	
+					<option value="2048">2048</option>	
+					<option value="DoubleBeat">Doublebeat</option>
+					<option value="No Limit">No Limit (MAY BE HARMFUL)</option>
+                                        <option value="Logmode">Logmode</option>
+                                        
+					
+					
 				</select>
 				<select id="control-samplerate" class="control-select" title="Sample rate" onchange="bytebeat.setSampleRate(+this.selectedOptions[0].value);">
 					<option value="8000" selected>8000Hz</option>
@@ -60,19 +67,17 @@
 					<option value="22050">22050Hz</option>
 					<option value="32000">32000Hz</option>
 					<option value="44100">44100Hz</option>
+					<option value="56000">56kHz</option>
+					<option value="64100">64.1kHz</option>
+			                <option value="72400">72.4kHz</option>
+					<option value="81900">81.9kHz</option>
+					<option value="90000">90kHz</option>
+					
 				</select>
+				
 				<input id="control-volume" type="range" min="0" max="100" value="35" title="Volume" oninput="bytebeat.setVolume(this);">
 				<div id="control-expand" class="control-button" title="Expand code editor" onclick="bytebeat.expandEditor();">
 					<svg><use xlink:href="#symbol-expand"></use></svg>
-				</div>
-			</div>
-			<div id="error"></div>
-			<div id="canvas-container" onclick="bytebeat.togglePlay(!bytebeat.isPlaying)">
-				<canvas id="canvas-main" width="1024" height="256"></canvas>
-				<div id="canvas-timecursor"></div>
-				<div id="canvas-toggleplay" class="canvas-initial canvas-play">
-					<svg id="svg-canvas-play"><use xlink:href="#symbol-play"></use></svg>
-					<svg id="svg-canvas-pause"><use xlink:href="#symbol-pause"></use></svg>
 				</div>
 			</div>
 		</div>
