@@ -74,16 +74,6 @@
 					<option value="90000">90kHz</option>
 					
 				</select>
-				<select id="control-fileformat" class="control-select" title="File Format" onchange="bytebeat.setFileFormat(+this.selectedOptions[0].value);">
-					<option value="1" selected>.3g2 (8kHz, bytebeat)</option>
-					<option value="2" selected>.3gp (16kHz, bytebeat)</option>
-					<option value="3" selected>.mp2 (32kHz, doublebeat)</option>
-					<option value="4" selected>.mp2 (44kHz, doublebeat)</option>
-					<option value="5" selected>.mp2 (44kHz, bytebeat)</option>
-					<option value="6" selected>.±mp3 (44kHz, 2048)</option>
-					<option value="7" selected>.mp3 (56kHz, 2048)</option>
-					//yes im a such stupid guy lololololololololol
-				</select>
 				
 				<input id="control-volume" type="range" min="0" max="100" value="35" title="Volume" oninput="bytebeat.setVolume(this);">
 				<div id="control-expand" class="control-button" title="Expand code editor" onclick="bytebeat.expandEditor();">
