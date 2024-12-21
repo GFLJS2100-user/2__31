@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div>WAS RECOVERED IN 29.12.2021 DUE STUPID PROGRAMIST DID BAD THINGS WITH FILES.</div>
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -74,14 +74,35 @@
 					<option value="90000">90kHz</option>
 					
 				</select>
-				
 				<input id="control-volume" type="range" min="0" max="100" value="35" title="Volume" oninput="bytebeat.setVolume(this);">
 				<div id="control-expand" class="control-button" title="Expand code editor" onclick="bytebeat.expandEditor();">
 					<svg><use xlink:href="#symbol-expand"></use></svg>
 				</div>
 			</div>
+			<div id="error"></div>
+			<div id="canvas-container" onclick="bytebeat.togglePlay(!bytebeat.isPlaying)">
+				<canvas id="canvas-main" width="1024" height="256"></canvas>
+				<div id="canvas-timecursor"></div>
+				<div id="canvas-toggleplay" class="canvas-initial canvas-play">
+					<svg id="svg-canvas-play"><use xlink:href="#symbol-play"></use></svg>
+					<svg id="svg-canvas-pause"><use xlink:href="#symbol-pause"></use></svg>
+				</div>
+			</div>
 		</div>
 		<div id="container-scroll">
+			<div class="library-content">
+				<div class="library-header toggle">May you need to know...</div>
+				<div id="info" class="library-container entry-top disabled">
+					2048 mode is mode when the value output of formula is in range from -2048 to 2048
+ 					Doublebeat named because doubles have float and big values. Output value in range from -255.0 to 255.0
+					No Limit has no range of stopping. WARNING: CAN BE VERY, VERY LAGGY!!!
+					Sinmode (aka Logmode) currently in developing.
+				</div>
+			</div>
+                                <div class="library-header toggle">desmos.com</div>
+                                <div id="info" class="library-container entry-top disabled">
+                                <iframe src="https://www.desmos.com/calculator/er1pcky38i?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+				</div> 
 			<div class="library-content">
 				<div class="library-header toggle">[Info] &mdash; about bytebeat</div>
 				<div id="info" class="library-container entry-top disabled">
@@ -178,3 +199,4 @@
 	</div>
 </body>
 </html>
+<div>end</div>
