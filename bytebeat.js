@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars tuk tuk tuk!!!!!!!!!!!!
 const bytebeat = new class Bytebeat {
 	constructor() {
 		//ii2
