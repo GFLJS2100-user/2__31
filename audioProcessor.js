@@ -73,7 +73,7 @@ class audioProcessor extends AudioWorkletProcessor {
 						this.lastValue = funcValue;
 						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
 					} else if(isLog){
-						this.lastByteValue = (Math.log2(funcValue) * 32) & 255;
+						this.lastByteValue = ((Math.sin(funcValue)) * 127 + 127) & 255;
 						this.lastValue = this.lastByteValue / 127.5 - 1;
 					}
 					else if(isSignedBytebeat){
