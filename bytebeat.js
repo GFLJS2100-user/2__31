@@ -160,6 +160,7 @@ const bytebeat = new class Bytebeat {
 		this.canvasElem = document.getElementById('canvas-main');
 		this.canvasCtx = this.canvasElem.getContext('2d');
 		this.canvasTogglePlay = document.getElementById('canvas-toggleplay');
+		this.controlRec = document.getElementById('control-rec');
 		this.containerFixed = document.getElementById('container-fixed');
 		this.controlCounter = document.getElementById('control-counter');
 		this.controlCounterUnits = document.getElementById('control-counter-units');
