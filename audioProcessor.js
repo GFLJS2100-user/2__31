@@ -29,8 +29,19 @@ class audioProcessor extends AudioWorkletProcessor {
 		let time = this.sampleRatio * this.audioSample;
 		let { byteSample } = this;
 		const drawBuffer = [];
+		
+		/*
+		hello i trying to add new mode but wtf it does not matter there is new code but GITHUB DOES NOT WANT TO UPLOAD IT
+		*/
+		
 		const isBytebeat = this.mode === 'Bytebeat';
 		const isFloatbeat = this.mode === 'Floatbeat';
+		const AnewMode = this.mode === '2048'; // STUPID GITHUB WHY YOU NOT USING WHY YOU NOT UPLOADING THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		const AnewModeasFloatBeat = this.mode === 'DoubleBeat';
+		const nowthisisnotmatters = this.mode === 'No Limit';
+                const isLog = this.mode === 'Logmode';
+                
+		
 		for(let i = 0; i < chDataLen; ++i) {
 			time += this.sampleRatio;
 			const flooredTime = Math.floor(time);
@@ -45,13 +56,26 @@ class audioProcessor extends AudioWorkletProcessor {
 				if(funcValue !== this.lastFuncValue) {
 					if(isNaN(funcValue)) {
 						this.lastByteValue = NaN;
-					} else if(isBytebeat) {
+					} if(isBytebeat) {
 						this.lastByteValue = funcValue & 255;
 						this.lastValue = this.lastByteValue / 127.5 - 1;
 					} else if(isFloatbeat) {
 						this.lastValue = funcValue = Math.max(Math.min(funcValue, 1), -1);
 						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
-					} else { // "Signed Byteveat"
+					} else if(AnewMode){
+						this.lastByteValue = funcValue & 2047;
+						this.lastValue = this.lastByteValue / 127.5 - 1;
+					} else if(AnewModeasFloatBeat){
+						this.lastValue = funcValue = Math.max(Math.min(funcValue, 255), -255);
+						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
+					} else if(nowthisisnotmatters){
+						this.lastValue = funcValue;
+						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
+					} else if(isLog){
+						this.lastByteValue = funcValue & 255;
+						this.lastValue = Math.sin(this.lastByteValue);
+					}
+					else { // "Signed Byteveat"
 						this.lastByteValue = (funcValue + 128) & 255;
 						this.lastValue = this.lastByteValue / 127.5 - 1;
 					}
