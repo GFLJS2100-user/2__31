@@ -64,7 +64,7 @@ class audioProcessor extends AudioWorkletProcessor {
 						this.lastValue = funcValue = Math.max(Math.min(funcValue, 1), -1);
 						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
 					} else if(AnewMode){
-						this.lastByteValue = Math.floor(funcValue & 255) / 8;
+						this.lastByteValue = (Math.floor(funcValue) / 8) & 255;
 						this.lastValue = this.lastByteValue / 127.5 - 1;
 					} else if(AnewModeasFloatBeat){
 						this.lastValue = funcValue = Math.max(Math.min(funcValue, 255), -255);
@@ -74,7 +74,7 @@ class audioProcessor extends AudioWorkletProcessor {
 						this.lastByteValue = Math.round((funcValue + 1) * 127.5);
 					} else if(isLog){
 						this.lastByteValue = Math.sin(funcValue);
-						this.lastValue = Math.sin(this.lastByteValue);
+						this.lastValue = this.lastByteValue / 127.5 - 1;
 					}
 					else if(isSignedBytebeat){
 						this.lastByteValue = (funcValue + 128) & 255;
