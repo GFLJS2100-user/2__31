@@ -47,7 +47,7 @@ const bytebeat = new class Bytebeat {
 		return saveData;
 	}
 	get timeCursorEnabled() {
-		return this.sampleRate >> this.settings.drawScale < 3950;
+		return this.sampleRate >> this.settings.drawScale < 1000;
 	}
 	animationFrame() {
 		this.drawGraphics(this.byteSample);
